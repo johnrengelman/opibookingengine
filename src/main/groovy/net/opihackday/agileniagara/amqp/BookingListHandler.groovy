@@ -1,5 +1,6 @@
 package net.opihackday.agileniagara.amqp
 
+import groovy.util.logging.Slf4j
 import net.opihackday.agileniagara.domain.Booking
 import net.opihackday.agileniagara.domain.Location
 import net.opihackday.agileniagara.domain.Season
@@ -7,7 +8,10 @@ import net.opihackday.agileniagara.repositories.BookingRepository
 import net.opihackday.agileniagara.repositories.LocationRepository
 import net.opihackday.agileniagara.repositories.SeasonRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 
+@Component
+@Slf4j
 class BookingListHandler extends DefaultHandler<List<Map>> {
 
     @Autowired
@@ -23,6 +27,7 @@ class BookingListHandler extends DefaultHandler<List<Map>> {
     List<Map> handleMessage(Map data) {
         Location location
         Season season
+        log.info("received: $data")
         if (!data.locationId) {
             throw new IllegalArgumentException('Must provide a valid Location ID')
         } else {
@@ -39,6 +44,7 @@ class BookingListHandler extends DefaultHandler<List<Map>> {
                 throw new IllegalArgumentException("No Season found for ID: ${data.seasonId}")
             }
         }
+        log.info("Finding bookings for Location [${location.name} between [${season.startDate}] - [${season.endDate}]")
         List<Booking> bookings = bookingRepository.findByLocation(location).findAll {
             it.startDate >= season.startDate && it.endDate <= season.endDate
         }
