@@ -7,6 +7,7 @@ import net.opihackday.agileniagara.domain.Location
 import net.opihackday.agileniagara.email.Emailer
 import net.opihackday.agileniagara.repositories.BookingRepository
 import net.opihackday.agileniagara.repositories.LocationRepository
+import org.joda.time.LocalDate
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -38,8 +39,8 @@ class BookingRequestHandler extends DefaultHandler<Map> {
         def booking = bookingRepository.save(new Booking(
                 username: request.username,
                 location: location,
-                startDate: request.startDate,
-                endDate: request.endDate
+                startDate: new LocalDate(request.startDate),
+                endDate: new LocalDate(request.endDate)
         ))
         emailer.sendSuccessfulBooking(booking)
         booking.toMap()

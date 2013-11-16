@@ -39,7 +39,7 @@ class SeasonListHandler extends DefaultHandler<List<Map>> {
         def role = roles.find { it.role == user.role}
         List<Season> seasons = seasonRepository.findAll()
         List<Season> filteredSeasons = seasons.findAll {
-            (today >= it.startDate.minus(role.window) || today < it.endDate)
+            (today >= it.startDate.minus(role.window) && today < it.endDate)
         }
         log.info("All seasons: $seasons")
         log.info("Filtered seasons: $filteredSeasons")
