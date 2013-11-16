@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
-@ContextConfiguration(locations = ['classpath:applicationContext.xml'])
+@ContextConfiguration(locations = ['classpath:testContext.xml', 'classpath:applicationContext.xml'])
 class AmqpHandlerSpec extends Specification {
 
     @Autowired

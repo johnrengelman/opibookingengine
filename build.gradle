@@ -32,4 +32,5 @@ dependencies {
     testCompile 'junit:junit:4.11'
     testCompile 'org.springframework:spring-test:3.1.4.RELEASE'
     testCompile 'org.spockframework:spock-spring:0.7-groovy-2.0'
+    testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:1.40'
 }

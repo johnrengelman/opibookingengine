@@ -5,6 +5,7 @@ import org.springframework.amqp.core.AmqpAdmin
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory
 import org.springframework.amqp.rabbit.connection.ConnectionFactory
 import org.springframework.amqp.rabbit.core.RabbitAdmin
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.mongodb.core.MongoTemplate
@@ -15,8 +16,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 class BookerConfig {
 
     @Bean
-    Mongo mongo() {
-        return new Mongo('localhost')
+    Mongo mongo(@Value('${mongo.host:localhost}') String host, @Value('${mongo.port:27017}') String port) {
+        return new Mongo(host, port.toInteger())
     }
 
     @Bean
