@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Scope
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
+import org.springframework.mail.javamail.JavaMailSender
+import org.springframework.mail.javamail.JavaMailSenderImpl
 
 @Configuration
 @EnableMongoRepositories(basePackages = ['net.opihackday.agileniagara.repositories'])
@@ -57,5 +59,21 @@ class BookerConfig {
     @Bean
     RabbitTemplate rabbitTemplate(ConnectionFactory cf) {
         new RabbitTemplate(cf)
+    }
+
+    @Bean
+    JavaMailSender mailSender() {
+      JavaMailSender sender = new JavaMailSenderImpl()
+      sender.host = "smtp.gmail.com"
+      sender.port = 587
+      sender.username = System.properties['email.user']
+      sender.password = System.properties['email.pass']
+
+      def props = [:]
+      props['mail.smtp.auth'] = "true"
+      props['mail.smtp.starttls.enable'] = "true"
+
+      sender.javaMailProperties = props as Properties
+      sender
     }
 }
