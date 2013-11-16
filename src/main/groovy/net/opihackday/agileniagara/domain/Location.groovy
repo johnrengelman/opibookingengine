@@ -10,4 +10,11 @@ class Location {
     String id
 
     String name
+
+    Map toMap() {
+        [
+                id: id,
+                name: name
+        ]
+    }
 }

@@ -1,6 +1,5 @@
 package net.opihackday.agileniagara.amqp
 
-import net.opihackday.agileniagara.api.BookingRequest
 import net.opihackday.agileniagara.domain.Booking
 import net.opihackday.agileniagara.domain.Location
 import net.opihackday.agileniagara.repositories.BookingRepository
@@ -10,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
-@ContextConfiguration(locations = ['classpath:testContext.xml', 'classpath:applicationContext.xml'])
-class AmqpHandlerSpec extends Specification {
+@ContextConfiguration(locations = ['classpath:applicationContext.xml'])
+class BookingRequestHandlerSpec extends Specification {
 
     @Autowired
-    AmqpHandler handler
+    BookingRequestHandler handler
 
     @Autowired
     LocationRepository locationRepository
@@ -26,18 +25,18 @@ class AmqpHandlerSpec extends Specification {
         given:
         Location location = new Location(name: 'condo')
         locationRepository.save(location)
-        BookingRequest request = new BookingRequest(
-                username: 'john',
-                locationName: location.name,
-                startDate: new LocalDate(2013, 11, 16),
-                endDate: new LocalDate(2013, 11, 17)
-        )
 
         when:
-        handler.handleMessage(request)
+        Map returnVal = handler.handleMessage([
+                username: 'john',
+                locationId: location.id,
+                startDate: new LocalDate(2013, 11, 16).toString(),
+                endDate: new LocalDate(2013, 11, 17).toString()
+        ])
 
         then:
-        List<Booking> savedBookings = bookingRepository.findByUsername(request.username)
+        List<Booking> savedBookings = bookingRepository.findByUsername('john')
         assert savedBookings.size() == 1
+        assert returnVal.id == savedBookings[0].id
     }
 }

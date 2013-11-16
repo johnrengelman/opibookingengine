@@ -12,4 +12,12 @@ class Season {
 
     LocalDate startDate
     LocalDate endDate
+
+    Map toMap() {
+        [
+                id: id,
+                startDate: startDate.toString(),
+                endDate: endDate.toString()
+        ]
+    }
 }

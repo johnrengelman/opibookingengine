@@ -14,4 +14,14 @@ class Booking {
     Location location
     LocalDate startDate
     LocalDate endDate
+
+    Map toMap() {
+        [
+                id: id,
+                username: username,
+                locationId: location.id,
+                startDate: startDate.toString(),
+                endDate: endDate.toString()
+        ]
+    }
 }
