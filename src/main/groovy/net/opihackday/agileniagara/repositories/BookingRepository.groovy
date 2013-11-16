@@ -5,4 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository
 
 interface BookingRepository extends MongoRepository<Booking, String> {
 
+    List<Booking> findByUsername(String username)
 }
