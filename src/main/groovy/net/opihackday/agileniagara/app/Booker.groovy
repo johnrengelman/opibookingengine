@@ -31,13 +31,14 @@ class Booker {
             }
         }
         [
-                [startDate: '2013-11-1', endDate: '2014-05-01'],
-                [startDate: '2014-05-01', endDate: '2014-11-1']
+                [startDate: '2013-11-1', endDate: '2014-05-01', name: 'Winter 2013'],
+                [startDate: '2014-05-01', endDate: '2014-11-1', name: 'Summer 2014']
         ].each { sInfo ->
             if (!seasonRepository.findByStartDate(new LocalDate(sInfo.startDate))) {
                 seasonRepository.save(new Season(
                         startDate: new LocalDate(sInfo.startDate),
-                        endDate: new LocalDate(sInfo.endDate)
+                        endDate: new LocalDate(sInfo.endDate),
+                        name: name
                 ))
             }
         }

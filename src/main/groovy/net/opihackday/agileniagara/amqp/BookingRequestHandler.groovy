@@ -4,6 +4,7 @@ import groovy.util.logging.Slf4j
 import net.opihackday.agileniagara.api.BookingRequest
 import net.opihackday.agileniagara.domain.Booking
 import net.opihackday.agileniagara.domain.Location
+import net.opihackday.agileniagara.email.Emailer
 import net.opihackday.agileniagara.repositories.BookingRepository
 import net.opihackday.agileniagara.repositories.LocationRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,6 +19,9 @@ class BookingRequestHandler extends DefaultHandler<Map> {
 
     @Autowired
     BookingRepository bookingRepository
+
+    @Autowired
+    Emailer emailer
 
     @Override
     Map handleMessage(Map data) {
@@ -37,6 +41,7 @@ class BookingRequestHandler extends DefaultHandler<Map> {
                 startDate: request.startDate,
                 endDate: request.endDate
         ))
+        emailer.sendSuccessfulBooking(booking)
         booking.toMap()
     }
 
