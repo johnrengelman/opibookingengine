@@ -38,7 +38,7 @@ class Booker {
                 seasonRepository.save(new Season(
                         startDate: new LocalDate(sInfo.startDate),
                         endDate: new LocalDate(sInfo.endDate),
-                        name: name
+                        name: sInfo.name
                 ))
             }
         }
