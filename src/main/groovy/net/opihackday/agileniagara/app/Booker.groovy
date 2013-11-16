@@ -1,6 +1,7 @@
 package net.opihackday.agileniagara.app
 
 import com.mongodb.Mongo
+import net.opihackday.agileniagara.amqp.AmqpHandler
 import org.springframework.amqp.core.AmqpAdmin
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory
 import org.springframework.amqp.rabbit.connection.ConnectionFactory
@@ -8,7 +9,6 @@ import org.springframework.amqp.rabbit.core.RabbitAdmin
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.support.AbstractApplicationContext
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 
@@ -41,6 +41,6 @@ class Booker {
     }
 
     public static void main(String[] args) {
-        AbstractApplicationContext context = new AnnotationConfigApplicationContext('net.opihackday.agileniagara')
+        new AnnotationConfigApplicationContext('net.opihackday.agileniagara')
     }
 }

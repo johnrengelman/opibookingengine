@@ -10,6 +10,7 @@ class Booking {
     @Id
     private String id
 
+    String username
     Location location
     LocalDate startDate
     LocalDate endDate
