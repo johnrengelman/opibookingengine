@@ -1,29 +1,30 @@
 package net.opihackday.agileniagara.amqp
 
 import groovy.util.logging.Slf4j
+import net.opihackday.agileniagara.domain.Location
 import net.opihackday.agileniagara.domain.Season
-import net.opihackday.agileniagara.repositories.SeasonRepository
+import net.opihackday.agileniagara.repositories.LocationRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
 @Slf4j
-class SeasonListHandler extends DefaultHandler<List<Map>> {
+class LocationListHandler extends DefaultHandler<List<Map>> {
 
     @Autowired
-    SeasonRepository seasonRepository
+    LocationRepository locationRepository
 
     @Override
     List<Map> handleMessage(Map data) {
         log.info("received: $data")
-        List<Season> seasons = seasonRepository.findAll()
-        seasons.collect {
+        List<Location> locations = locationRepository.findAll()
+        locations.collect {
             it.toMap()
         }
     }
 
     @Override
     String getQueueName() {
-        'season.list'
+        'location.list'
     }
 }
