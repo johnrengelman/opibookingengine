@@ -41,3 +41,7 @@ dependencies {
     testCompile 'org.spockframework:spock-spring:0.7-groovy-2.0'
     testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:1.40'
 }
+
+run {
+    systemProperties = ['email.user': "${opiemail}", 'email.pass': "${opipass}"]
+}
