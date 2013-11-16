@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component
 
 @Component
 @Slf4j
-class BookingRequestHandler extends DefaultHandler {
+class BookingRequestHandler extends DefaultHandler<Map> {
 
     @Autowired
     LocationRepository locationRepository
@@ -21,7 +21,7 @@ class BookingRequestHandler extends DefaultHandler {
 
     @Override
     Map handleMessage(Map data) {
-        println "received a map: ${data}"
+        log.info "received: ${data}"
         BookingRequest request = new BookingRequest(data)
         Location location = locationRepository.findOne(request.locationId)
         if (!location) {

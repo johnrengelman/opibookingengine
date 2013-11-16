@@ -9,7 +9,7 @@ import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.amqp.core.Queue
 
-abstract class DefaultHandler implements InitializingBean, DisposableBean {
+abstract class DefaultHandler<T> implements InitializingBean, DisposableBean {
 
     @Autowired
     AmqpHandler handler
@@ -37,6 +37,6 @@ abstract class DefaultHandler implements InitializingBean, DisposableBean {
         container.destroy()
     }
 
-    abstract Map handleMessage(Map data)
+    abstract T handleMessage(Map data)
     abstract String getQueueName()
 }
