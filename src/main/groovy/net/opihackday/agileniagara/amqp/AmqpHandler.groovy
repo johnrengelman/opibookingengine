@@ -18,8 +18,10 @@ import org.springframework.beans.factory.DisposableBean
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.amqp.core.Queue
+import org.springframework.stereotype.Component
 
 @Slf4j
+@Component
 class AmqpHandler implements InitializingBean, DisposableBean {
 
     AbstractMessageListenerContainer container
@@ -49,6 +51,7 @@ class AmqpHandler implements InitializingBean, DisposableBean {
         Queue queue = new Queue('bookingRequest')
         TopicExchange exchange = new TopicExchange('bookingExchange')
         amqpAdmin.declareExchange(exchange)
+        amqpAdmin.declareQueue(queue)
         amqpAdmin.declareBinding(
                 BindingBuilder.bind(queue).to(exchange).with('request.*')
         )

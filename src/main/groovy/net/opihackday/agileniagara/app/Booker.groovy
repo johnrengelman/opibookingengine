@@ -1,7 +1,6 @@
 package net.opihackday.agileniagara.app
 
 import com.mongodb.Mongo
-import net.opihackday.agileniagara.amqp.AmqpHandler
 import org.springframework.amqp.core.AmqpAdmin
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory
 import org.springframework.amqp.rabbit.connection.ConnectionFactory
@@ -13,7 +12,7 @@ import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 
 @Configuration
-@EnableMongoRepositories
+@EnableMongoRepositories(basePackages = ['net.opihackday.agileniagara.repositories'])
 class Booker {
 
     @Bean
