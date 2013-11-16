@@ -31,10 +31,14 @@ class BookerConfig {
 
     @Bean
     ConnectionFactory connectionFactory() {
-        ConnectionFactory cf = new CachingConnectionFactory('lemur.cloudamqp.com', 5672)
-        cf.username = 'jzqonxoa'
-        cf.password = 'am3WlvBWtGJ95WIN4Uuxuu3uWdXYcYHJ'
-        cf.virtualHost = 'jzqonxoa'
+//        ConnectionFactory cf = new CachingConnectionFactory('lemur.cloudamqp.com', 5672)
+//        cf.username = 'jzqonxoa'
+//        cf.password = 'am3WlvBWtGJ95WIN4Uuxuu3uWdXYcYHJ'
+//        cf.virtualHost = 'jzqonxoa'
+        ConnectionFactory cf = new CachingConnectionFactory('192.168.168.227', 5672)
+        cf.username = 'guest'
+        cf.password = 'guest'
+        cf.virtualHost = 'niagara'
         cf
     }
 

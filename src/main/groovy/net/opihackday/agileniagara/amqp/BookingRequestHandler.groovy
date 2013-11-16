@@ -27,6 +27,9 @@ class BookingRequestHandler extends DefaultHandler<Map> {
         if (!location) {
             log.error("Error processing booking for [${request.username}]. " +
                     "Location [${request.locationId}] does not exist")
+            throw new IllegalArgumentException("Error processing booking for [${request.username}]. " +
+                    "Location [${request.locationId}] does not exist"
+            )
         }
         def booking = bookingRepository.save(new Booking(
                 username: request.username,
