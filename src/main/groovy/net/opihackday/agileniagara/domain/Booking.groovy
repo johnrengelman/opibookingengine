@@ -19,7 +19,7 @@ class Booking {
         [
                 id: id,
                 username: username,
-                locationId: location.id,
+                location: location.toMap(),
                 startDate: startDate.toString(),
                 endDate: endDate.toString()
         ]
