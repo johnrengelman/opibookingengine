@@ -5,6 +5,7 @@ import org.springframework.amqp.core.AmqpAdmin
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory
 import org.springframework.amqp.rabbit.connection.ConnectionFactory
 import org.springframework.amqp.rabbit.core.RabbitAdmin
+import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer
 import org.springframework.beans.factory.annotation.Value
@@ -51,5 +52,10 @@ class BookerConfig {
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     AbstractMessageListenerContainer messageContainer(ConnectionFactory cf) {
         new SimpleMessageListenerContainer(cf)
+    }
+
+    @Bean
+    RabbitTemplate rabbitTemplate(ConnectionFactory cf) {
+        new RabbitTemplate(cf)
     }
 }
